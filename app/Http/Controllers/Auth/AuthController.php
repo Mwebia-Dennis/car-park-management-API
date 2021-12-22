@@ -67,27 +67,27 @@ class AuthController extends Controller
         
         try {
             
-            $oClient = OClient::where('password_client', 1)->first();
-            $http = new Client;
-            $__user = new User();
-            // $user = $__user->where('email', $email)->first();
+            // $oClient = OClient::where('password_client', 1)->first();
+            // $http = new Client;
 
-            $response = $http->request('POST', ('http://127.0.0.1:8001/oauth/token'), [
-                'form_params' => [
-                    'grant_type' => 'password',
-                    'client_id' => $oClient->id,
-                    'client_secret' => $oClient->secret,
-                    'username' => $email,
-                    'password' => $password,
-                    'scope' => '*',
-                ],
-            ]);
-            return json_decode((string)$response->getBody(), true);
+            // $response = $http->request('POST', ('http://127.0.0.1:8001/oauth/token'), [
+            //     'form_params' => [
+            //         'grant_type' => 'password',
+            //         'client_id' => $oClient->id,
+            //         'client_secret' => $oClient->secret,
+            //         'username' => $email,
+            //         'password' => $password,
+            //         'scope' => '*',
+            //     ],
+            // ]);
+            // return json_decode((string)$response->getBody(), true);
+            $__user = new User();
+            $user = $__user->where('email', $email)->first();
 
             // Creating a token without scopes...
-            // $token = $user->createToken('Token Name')->accessToken->token;
+            $token = $user->createToken('Token Name')->accessToken;
 
-            // return response()->json(["access_token" => $token], 201);
+            return response()->json(["access_token" => $token], 201);
 
 
         }catch(Exception $ex) {
