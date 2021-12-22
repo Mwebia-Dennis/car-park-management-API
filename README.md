@@ -4,5 +4,5 @@ features include:
 * authentication
 * car park crud (create read updates and delete) data operations
 * database/migration settings
-# installation
+## installation
 check laravel 8 tutorial (https://laravel.com/docs/8.x) for more information on laravel apis
